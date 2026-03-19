@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ticket Regalo – Día del Padre</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Mono:wght@400;500&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #1a1208;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Mono', monospace;
+    padding: 40px 20px;
+    background-image:
+      radial-gradient(ellipse 80% 60% at 50% 0%, #3d2200 0%, transparent 70%),
+      radial-gradient(ellipse 60% 40% at 80% 100%, #2a1a00 0%, transparent 60%);
+  }
+
+  .ticket-wrapper {
+    position: relative;
+    width: 680px;
+  }
+
+  .ticket-wrapper::after {
+    content: '';
+    position: absolute;
+    inset: 20px -10px -20px 10px;
+    background: rgba(0,0,0,0.5);
+    filter: blur(24px);
+    border-radius: 20px;
+    z-index: -1;
+  }
+
+  .ticket {
+    background: #f5ead0;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .ticket-header {
+    background: #b8821a;
+    background-image: linear-gradient(135deg, #d4a830 0%, #8a5e10 40%, #c9941e 60%, #7a4f0c 100%);
+    padding: 28px 40px 22px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ticket-header::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.07);
+  }
+
+  .ticket-header::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: 30px;
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+  }
+
+  .header-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #f9e5a0;
+    opacity: 0.85;
+    margin-bottom: 4px;
+  }
+
+  .header-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 54px;
+    color: #fff8e7;
+    line-height: 1;
+    letter-spacing: 3px;
+    text-shadow: 2px 3px 10px rgba(0,0,0,0.3);
+  }
+
+  .header-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: #fdf0c4;
+    margin-top: 6px;
+    opacity: 0.9;
+  }
+
+  .name-badge {
+    display: inline-block;
+    margin-top: 10px;
+    background: rgba(0,0,0,0.2);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 6px;
+    padding: 5px 14px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 3px;
+    color: #fff8e7;
+  }
+
+  .burger-stamp {
+    position: absolute;
+    right: 36px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 90px;
+    height: 90px;
+    border: 3px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 46px;
+    background: rgba(0,0,0,0.12);
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.2);
+  }
+
+  .ticket-body {
+    padding: 32px 40px 24px;
+    position: relative;
+    background-image:
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 39px,
+        rgba(0,0,0,0.04) 39px,
+        rgba(0,0,0,0.04) 40px
+      );
+  }
+
+  .gift-message {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    color: #5c3d11;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+
+  .invitation-text {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 26px;
+    color: #2d1a06;
+    line-height: 1.3;
+    margin-bottom: 20px;
+  }
+
+  .invitation-text em {
+    color: #b8821a;
+    font-style: italic;
+  }
+
+  .restaurant-options {
+    background: #2d1a06;
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin-bottom: 22px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .restaurant-options::before {
+    content: 'CANJEABLE EN';
+    position: absolute;
+    top: -1px; left: 50%; transform: translateX(-50%);
+    font-size: 8px;
+    letter-spacing: 3px;
+    color: #d4a830;
+    background: #2d1a06;
+    padding: 0 10px;
+  }
+
+  .options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 6px;
+  }
+
+  .option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(212,168,48,0.25);
+    border-radius: 7px;
+    padding: 10px 14px;
+  }
+
+  .option-emoji { font-size: 22px; }
+
+  .option-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 17px;
+    color: #f5ead0;
+    letter-spacing: 1.5px;
+  }
+
+  .option-desc {
+    font-size: 9px;
+    color: #a0855a;
+    letter-spacing: 0.5px;
+    margin-top: 1px;
+  }
+
+  .option-other {
+    grid-column: span 2;
+    border-style: dashed;
+    border-color: rgba(212,168,48,0.4);
+    justify-content: center;
+  }
+
+  .option-other .option-name { color: #d4a830; }
+
+  .voucher-details {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 8px;
+  }
+
+  .detail-box {
+    flex: 1;
+    background: #eddcb3;
+    border-radius: 8px;
+    padding: 12px 14px;
+    border-left: 3px solid #b8821a;
+  }
+
+  .detail-label {
+    font-size: 8px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #8a5e10;
+    margin-bottom: 3px;
+  }
+
+  .detail-value {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: #2d1a06;
+  }
+
+  .ticket-divider {
+    position: relative;
+    height: 0;
+    border-top: 2px dashed #c4a76e;
+    margin: 0 -1px;
+  }
+
+  .ticket-divider::before,
+  .ticket-divider::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 28px;
+    height: 28px;
+    background: #1a1208;
+    border-radius: 50%;
+  }
+
+  .ticket-divider::before { left: -14px; }
+  .ticket-divider::after  { right: -14px; }
+
+  .ticket-footer {
+    padding: 20px 40px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .footer-msg {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: #5c3d11;
+    max-width: 280px;
+    line-height: 1.5;
+  }
+
+  .barcode-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .barcode {
+    display: flex;
+    gap: 2px;
+    align-items: flex-end;
+    height: 44px;
+  }
+
+  .bar {
+    background: #2d1a06;
+    border-radius: 1px;
+    width: 3px;
+  }
+
+  .barcode-number {
+    font-size: 8px;
+    letter-spacing: 3px;
+    color: #8a5e10;
+  }
+</style>
+</head>
+<body>
+
+<div class="ticket-wrapper">
+  <div class="ticket">
+
+    <!-- HEADER -->
+    <div class="ticket-header">
+      <div class="header-label">Vale de regalo · Día del Padre 2025</div>
+      <div class="header-title">FELIZ DÍA,<br>PAPÁ</div>
+      <div class="header-subtitle">Con todo el amor del mundo 🧡</div>
+      <div class="name-badge">Fernando González</div>
+      <div class="burger-stamp">🍔</div>
+    </div>
+
+    <!-- CUERPO -->
+    <div class="ticket-body">
+
+      <div class="gift-message">Este vale te invita a</div>
+      <div class="invitation-text">
+        Una comida <em>especial</em> para ti,<br>
+        donde tú elijas 🎉
+      </div>
+
+      <div class="restaurant-options">
+        <div class="options-grid">
+          <div class="option">
+            <span class="option-emoji">🔥</span>
+            <div>
+              <div class="option-name">Dak Burger</div>
+              <div class="option-desc">Smash burgers artesanales</div>
+            </div>
+          </div>
+          <div class="option">
+            <span class="option-emoji">🌮</span>
+            <div>
+              <div class="option-name">Street Food</div>
+              <div class="option-desc">Sabores de calle auténticos</div>
+            </div>
+          </div>
+          <div class="option">
+            <span class="option-emoji">🏆</span>
+            <div>
+              <div class="option-name">Champions</div>
+              <div class="option-desc">Burger premium experience</div>
+            </div>
+          </div>
+          <div class="option option-other">
+            <span class="option-emoji">✨</span>
+            <div>
+              <div class="option-name">¡O donde tú quieras!</div>
+              <div class="option-desc">Tú mandas, Fernando</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="voucher-details">
+        <div class="detail-box">
+          <div class="detail-label">Válido hasta</div>
+          <div class="detail-value">31 de dic · 2026</div>
+        </div>
+        <div class="detail-box">
+          <div class="detail-label">Incluye</div>
+          <div class="detail-value">Menú completo 🍟🥤</div>
+        </div>
+        <div class="detail-box">
+          <div class="detail-label">Personas</div>
+          <div class="detail-value">Para ti y quien quieras</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- DIVISOR -->
+    <div class="ticket-divider"></div>
+
+    <!-- PIE -->
+    <div class="ticket-footer">
+      <div class="footer-msg">
+        "Fernando, este vale es nuestro para compartir ese momento contigo. Solo dices cuándo y vamos." 🤝
+      </div>
+      <div class="barcode-area">
+        <div class="barcode" id="barcode"></div>
+        <div class="barcode-number">DAD · 2025 · 🍔</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  const barcode = document.getElementById('barcode');
+  const heights = [30,20,40,15,35,25,44,18,28,38,22,42,16,32,26,44,20,36,14,30,40,24,38,18,34,22,44,16,28,32];
+  heights.forEach(h => {
+    const bar = document.createElement('div');
+    bar.className = 'bar';
+    bar.style.height = h + 'px';
+    barcode.appendChild(bar);
+  });
+</script>
+
+</body>
+</html>
